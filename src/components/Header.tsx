@@ -1,15 +1,13 @@
 function Header() {
   return (
     <header
-
       style={{
-        display: 'flex',
-        backgroundColor: '#191919',
-        padding: '0rem 1rem',
+        display: "flex",
+        backgroundColor: "#191919",
+        padding: "0rem 1rem",
       }}
     >
-      <h1>HVEMPUTTA</h1>
-
+      <h1>BOUMOB</h1>
     </header>
   );
 }

@@ -1,8 +1,7 @@
 .standings-wrapper {
-  background: #191919;
+  background: #1b1b1b;
   border-radius: 8px;
   padding: 1rem 0.75rem 0.5rem;
-  margin: 1rem;
   font-size: 0.9rem;
   overflow: hidden;
 }
@@ -13,13 +12,19 @@
   grid-template-columns:
     1rem /* pos */
     minmax(5rem, 1fr) /* lag */
-    repeat(7, minmax(1.2rem, 3rem)); /* resten */
+    repeat(7, minmax(1rem, 5rem)); /* resten */
   align-items: center;
-  padding: 0.45rem 0.4rem;
+  padding: 0.45rem 0rem;
+  margin-bottom: 0.5rem;
+}
+
+.standings-grid > span {
+  white-space: nowrap;
 }
 
 .standings-row {
   border-top: 1px solid #101010;
+  padding: 0rem 0.1rem;
 }
 
 .standings-row.top {
@@ -39,25 +44,35 @@
 }
 
 .team {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .points {
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: bold;
 }
 
 @media (max-width: 600px) {
   .standings-wrapper {
     font-size: 0.8rem;
-
     margin: 0.2rem;
   }
   .standings-grid {
-    column-gap: 0.4rem;
+    column-gap: 1rem;
+    text-align: left;
+    grid-template-columns:
+      0.1rem
+      minmax(5rem, 1fr)
+      1rem
+      1rem
+      1rem
+      1rem
+      2.2rem
+      1rem
+      1rem;
+  }
+  .standings-row {
+    padding: 0;
   }
   .standings-header {
     font-size: 0.68rem;

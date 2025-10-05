@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import Matches from "./components/Matches";
+import Matches from "./components/Matches/Matches";
 import Standings from "./components/Standings/Standings";
 
 function App() {

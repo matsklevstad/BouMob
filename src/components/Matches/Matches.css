@@ -1,0 +1,48 @@
+.matches-wrapper {
+  border-radius: 8px;
+  padding: 1rem 0.75rem 0.5rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.match-group {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1b1b1b;
+}
+
+.match-date {
+  border-bottom: 1px solid #080808ff;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns:
+    1fr /* home */
+    60px /* score/time */
+    1fr /* away */;
+  align-items: center;
+  justify-items: center;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.team-logo {
+  height: 1.5rem;
+}
+
+.match-row:hover {
+  background: #202020;
+}
+
+@media (max-width: 600px) {
+  .matches-wrapper {
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0.2rem;
+    margin-top: 1rem;
+  }
+}
