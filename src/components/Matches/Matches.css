@@ -13,7 +13,7 @@
 }
 
 .match-date {
-  border-bottom: 1px solid #080808ff;
+  border-bottom: 1px solid #161616;;
   padding-bottom: 0.5rem;
   font-weight: bold;
 }
@@ -40,7 +40,7 @@
 
 @media (max-width: 600px) {
   .matches-wrapper {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     padding: 0;
     margin: 0.2rem;
     margin-top: 1rem;

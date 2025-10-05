@@ -26,26 +26,30 @@ function Standings() {
   return (
     <div className="standings-wrapper">
       <div className="standings-grid">
-        <span>#</span>
-        <span>Lag</span>
-        <span>SP</span>
-        <span>V</span>
-        <span>U</span>
-        <span>T</span>
-        <span style={{textAlign: 'center'}}>+/-</span>
-        <span>MF</span>
-        <span>P</span>
+        <span style={{ fontWeight: "bold" }}>#</span>
+        <span style={{ fontWeight: "bold" }}>Lag</span>
+        <span style={{ fontWeight: "bold" }}>SP</span>
+        <span style={{ fontWeight: "bold" }}>V</span>
+        <span style={{ fontWeight: "bold" }}>U</span>
+        <span style={{ fontWeight: "bold" }}>T</span>
+        <span style={{ fontWeight: "bold", textAlign: "center" }}>+/-</span>
+        <span style={{ fontWeight: "bold" }}>MF</span>
+        <span style={{ fontWeight: "bold" }}>P</span>
       </div>
       {data.map((team) => {
         const highlight =
-          team.position === 1 ? "top" : team.position === 9 ? "bottom" : "";
+          team.position === 1
+            ? "top"
+            : team.position === 9
+            ? "bottom"
+            : "middle";
         return (
           <div
             key={team.position}
             className={`standings-grid standings-row ${highlight}`}
           >
             <p>{team.position}</p>
-            <p className="team">
+            <span className="team">
               <img
                 src={getTeamLogo(team.orgId)}
                 alt={team.orgName}
@@ -60,13 +64,17 @@ function Standings() {
               >
                 {team.orgName}
               </p>
-            </p>
+            </span>
             <p>{team.matches}</p>
             <p>{team.victories}</p>
             <p>{team.draws}</p>
             <p>{team.losses}</p>
             <span>{team.totalGoalsFormatted}</span>
-            <p>{team.goalDifference > 0 ? `+${team.goalDifference}` : team.goalDifference}</p>
+            <p>
+              {team.goalDifference > 0
+                ? `+${team.goalDifference}`
+                : team.goalDifference}
+            </p>
             <p className="points">{team.totalPoints}</p>
           </div>
         );

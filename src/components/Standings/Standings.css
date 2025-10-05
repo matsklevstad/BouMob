@@ -4,6 +4,7 @@
   padding: 1rem 0.75rem 0.5rem;
   font-size: 0.9rem;
   overflow: hidden;
+  margin: 0.5rem;
 }
 
 .standings-grid {
@@ -23,18 +24,24 @@
 }
 
 .standings-row {
-  border-top: 1px solid #101010;
+  border-top: 1px solid #161616;
   padding: 0rem 0.1rem;
 }
 
 .standings-row.top {
-  border-left: 3px solid #5dbc6f;
+  border-left: 5px solid #5dbc6f;
+  margin-left: -0.75rem;
+  padding-left: calc(0.4rem + 0.75rem - 3px);
+}
+
+.standings-row.middle {
+  border-left: 5px solid transparent;
   margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
 }
 
 .standings-row.bottom {
-  border-left: 3px solid #ec564f;
+  border-left: 5px solid #ec564f;
   margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
 }
@@ -56,7 +63,9 @@
   .standings-wrapper {
     font-size: 0.8rem;
     margin: 0.2rem;
+    margin-top: 1rem;
   }
+
   .standings-grid {
     column-gap: 1rem;
     text-align: left;
@@ -69,10 +78,12 @@
       1rem
       2.2rem
       1rem
-      1rem;
+      1rem;;
   }
   .standings-row {
     padding: 0;
+    margin: 0;
+
   }
   .standings-header {
     font-size: 0.68rem;

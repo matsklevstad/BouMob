@@ -4,6 +4,7 @@ function Header() {
       style={{
         display: "flex",
         backgroundColor: "#191919",
+        borderRadius: "8px",
         padding: "0rem 1rem",
       }}
     >
