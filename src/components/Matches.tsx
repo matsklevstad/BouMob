@@ -45,8 +45,6 @@ function Matches() {
     <div
       style={{
         padding: "1rem",
-        margin: "1rem",
-
         borderRadius: "8px",
       }}
     >
@@ -81,7 +79,10 @@ function Matches() {
               <p style={{ fontWeight: "bold" }}>
                 {match.matchResult
                   ? `${match.matchResult.homeGoals} - ${match.matchResult.awayGoals}`
-                  : match.matchStartTime.toString().padStart(4, "0").replace(/(\d{2})(\d{2})/, "$1:$2")}
+                  : match.matchStartTime
+                      .toString()
+                      .padStart(4, "0")
+                      .replace(/(\d{2})(\d{2})/, "$1:$2")}
               </p>
               <p>{match.awayteam.split("-")[0]}</p>
             </div>

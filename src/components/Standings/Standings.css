@@ -1,0 +1,65 @@
+.standings-wrapper {
+  background: #191919;
+  border-radius: 8px;
+  padding: 1rem 0.75rem 0.5rem;
+  margin: 1rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.standings-grid {
+  display: grid;
+  /* 9 kolonner: pos | lag | 7 tall */
+  grid-template-columns:
+    1rem /* pos */
+    minmax(5rem, 1fr) /* lag */
+    repeat(7, minmax(1.2rem, 3rem)); /* resten */
+  align-items: center;
+  padding: 0.45rem 0.4rem;
+}
+
+.standings-row {
+  border-top: 1px solid #101010;
+}
+
+.standings-row.top {
+  border-left: 3px solid #5dbc6f;
+  margin-left: -0.75rem;
+  padding-left: calc(0.4rem + 0.75rem - 3px);
+}
+
+.standings-row.bottom {
+  border-left: 3px solid #ec564f;
+  margin-left: -0.75rem;
+  padding-left: calc(0.4rem + 0.75rem - 3px);
+}
+
+.standings-row:hover {
+  background: #202020;
+}
+
+.team {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.points {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .standings-wrapper {
+    font-size: 0.8rem;
+
+    margin: 0.2rem;
+  }
+  .standings-grid {
+    column-gap: 0.4rem;
+  }
+  .standings-header {
+    font-size: 0.68rem;
+  }
+}
