@@ -1,26 +1,34 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { Standing } from "../../types/Standing";
 import "./Standings.css";
 import { getTeamLogo } from "../../utils/utils";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function Standings() {
   const ENDPOINT_URL = "/api/tournament-standings?tournamentId=436311";
-  const [data, setData] = useState<Standing[]>([]);
 
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      try {
-        const response = await fetch(ENDPOINT_URL).then((res) => res.json());
-        setData(response);
-      } catch (e) {
-        console.error(e);
+  const {
+    data = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["standings"],
+    queryFn: async (): Promise<Standing[]> => {
+      const response = await fetch(ENDPOINT_URL);
+      if (!response.ok) {
+        throw new Error("Failed to fetch standings");
       }
-    })();
-    return () => {
-      active = false;
-    };
-  }, []);
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div className="standings-wrapper">Error loading standings</div>;
+  }
 
   return (
     <div className="standings-wrapper">
@@ -40,8 +48,8 @@ function Standings() {
           team.position === 1
             ? "top"
             : team.position === 9
-            ? "bottom"
-            : "middle";
+              ? "bottom"
+              : "middle";
         return (
           <div
             key={team.position}

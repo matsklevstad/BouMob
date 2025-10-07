@@ -19,7 +19,7 @@
 }
 
 @media (max-width: 600px) {
-.tab{
-  font-size: 0.85rem;
-}
+  .tab {
+    font-size: 0.85rem;
+  }
 }

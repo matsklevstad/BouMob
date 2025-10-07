@@ -1,5 +1,7 @@
 /* Base layout */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -15,6 +17,4 @@ body {
   line-height: 1.4;
   background: #000;
   color: #fff;
-
 }
-

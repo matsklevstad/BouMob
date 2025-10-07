@@ -1,21 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { Match } from "../../types/Match";
 import "./Matches.css";
 import { getTeamLogo } from "../../utils/utils";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function Matches() {
   const ENDPOINT_URL = "/api/tournament-matches?tournamentId=436311";
-  const [data, setData] = useState<Match[]>([]);
   const upcomingRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(ENDPOINT_URL).then((res) => res.json());
-      setData(response.matches);
-    };
-    fetchData();
-  }, []);
+  const {
+    data: matchesData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["matches"],
+    queryFn: async (): Promise<{ matches: Match[] }> => {
+      const response = await fetch(ENDPOINT_URL);
+      if (!response.ok) {
+        throw new Error("Failed to fetch matches");
+      }
+      return response.json();
+    },
+  });
+
+  const data = matchesData?.matches || [];
 
   useEffect(() => {
     if (upcomingRef.current && scrollContainerRef.current) {
@@ -27,10 +37,18 @@ function Matches() {
     }
   }, [data]);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div className="matches-wrapper">Error loading matches</div>;
+  }
+
   function groupMatchesByDate(matches: Match[]) {
     const sortedMatches = [...matches].sort(
       (a, b) =>
-        new Date(a.matchDate).getTime() - new Date(b.matchDate).getTime()
+        new Date(a.matchDate).getTime() - new Date(b.matchDate).getTime(),
     );
 
     const grouped: Record<string, Match[]> = {};
@@ -49,7 +67,7 @@ function Matches() {
 
   const groupedMatches = groupMatchesByDate(data);
   const firstUpcomingDateKey = Object.entries(groupedMatches).find(
-    ([_, matches]) => matches.some((match) => !match.matchResult)
+    ([, matches]) => matches.some((match) => !match.matchResult),
   )?.[0];
 
   return (
@@ -76,13 +94,16 @@ function Matches() {
               })
                 ? "I dag"
                 : date ===
-                  new Date(Date.now() - 86400000).toLocaleDateString("nb-NO", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                  })
-                ? "I går  "
-                : date}
+                    new Date(Date.now() - 86400000).toLocaleDateString(
+                      "nb-NO",
+                      {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                      },
+                    )
+                  ? "I går  "
+                  : date}
             </p>
             {matches.map((match) => (
               <div key={match.matchId} className="match-row">

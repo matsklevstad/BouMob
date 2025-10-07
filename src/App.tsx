@@ -13,11 +13,11 @@ function App() {
   return (
     <div>
       <div className="header-container">
-      <Header />
-      <SelectView
-        selectedView={selectedView}
-        setSelectedView={setSelectedView}
-      />
+        <Header />
+        <SelectView
+          selectedView={selectedView}
+          setSelectedView={setSelectedView}
+        />
       </div>
       {selectedView === "Matches" ? <Matches /> : <Standings />}
     </div>

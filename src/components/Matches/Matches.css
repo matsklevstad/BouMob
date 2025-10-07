@@ -13,7 +13,7 @@
 }
 
 .match-date {
-  border-bottom: 1px solid #161616;;
+  border-bottom: 1px solid #161616;
   padding-bottom: 0.5rem;
   font-weight: bold;
 }
@@ -63,7 +63,7 @@
     margin: 0.2rem;
     margin-top: 1rem;
   }
-  .match-group{
+  .match-group {
     padding: 0.2rem 1rem;
   }
 
