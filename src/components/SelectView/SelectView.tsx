@@ -18,9 +18,9 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
         const diffX = endX - startX;
 
         if (diffX > 50) {
-          setSelectedView("Matches"); // Swipe right
+          setSelectedView("Standings"); // Swipe right
         } else if (diffX < -50) {
-          setSelectedView("Standings"); // Swipe left
+          setSelectedView("Matches"); // Swipe left
         }
 
         document.removeEventListener("touchend", handleSwipeEnd);

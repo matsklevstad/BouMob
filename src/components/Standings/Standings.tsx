@@ -61,7 +61,7 @@ function Standings() {
                   whiteSpace: "nowrap",
                 }}
               >
-                {team.orgId}
+                {team.orgName}
               </p>
             </span>
             <p>{team.matches}</p>

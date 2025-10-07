@@ -86,15 +86,7 @@ function Matches() {
             </p>
             {matches.map((match) => (
               <div key={match.matchId} className="match-row">
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    justifyContent: "flex-end",
-                    width: "100%",
-                  }}
-                >
+                <span className="home-team">
                   <p>{match.hometeamOrgName}</p>
                   <img
                     src={getTeamLogo(match.hometeamId)}
@@ -109,15 +101,7 @@ function Matches() {
                         .padStart(4, "0")
                         .replace(/(\d{2})(\d{2})/, "$1:$2")}
                 </p>
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    justifyContent: "flex-start",
-                    width: "100%",
-                  }}
-                >
+                <span className="away-team">
                   <img
                     src={getTeamLogo(match.awayteamId)}
                     className="team-logo"

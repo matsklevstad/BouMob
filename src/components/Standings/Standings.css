@@ -29,19 +29,19 @@
 }
 
 .standings-row.top {
-  border-left: 5px solid #5dbc6f;
+  border-left: 2px solid #5dbc6f;
   margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
 }
 
 .standings-row.middle {
-  border-left: 5px solid transparent;
+  border-left: 2px solid transparent;
   margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
 }
 
 .standings-row.bottom {
-  border-left: 5px solid #ec564f;
+  border-left: 2px solid #ec564f;
   margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
 }

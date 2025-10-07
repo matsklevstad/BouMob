@@ -1,6 +1,6 @@
 .matches-wrapper {
   border-radius: 8px;
-  padding: 1rem 0.75rem 0.5rem;
+  padding: 1.5rem 0.75rem 0.5rem;
   font-size: 0.9rem;
   overflow: hidden;
 }
@@ -30,6 +30,24 @@
   text-align: center;
 }
 
+.home-team {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  gap: 4px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.away-team {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 4px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .team-logo {
   height: 1.5rem;
 }
@@ -41,8 +59,15 @@
 @media (max-width: 600px) {
   .matches-wrapper {
     font-size: 0.75rem;
-    padding: 0;
+    padding: 0.5rem 0rem;
     margin: 0.2rem;
     margin-top: 1rem;
+  }
+  .match-group{
+    padding: 0.2rem 1rem;
+  }
+
+  .match-date {
+    font-size: 0.85rem;
   }
 }
