@@ -23,7 +23,7 @@ function App() {
         <div
           className={`view-content ${selectedView === "Matches" ? "active" : "hidden"}`}
         >
-          <Matches />
+          <Matches isActive={selectedView === "Matches"} />
         </div>
         <div
           className={`view-content ${selectedView === "Standings" ? "active" : "hidden"}`}

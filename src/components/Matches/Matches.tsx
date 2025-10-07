@@ -5,10 +5,15 @@ import "./Matches.css";
 import { getTeamLogo } from "../../utils/utils";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-function Matches() {
+interface Props {
+  isActive: boolean;
+}
+
+function Matches(props: Props) {
   const ENDPOINT_URL = "/api/tournament-matches?tournamentId=436311";
   const upcomingRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const hasScrolledOnFirstActivation = useRef(false);
 
   const {
     data: matchesData,
@@ -28,14 +33,30 @@ function Matches() {
   const data = matchesData?.matches || [];
 
   useEffect(() => {
-    if (upcomingRef.current && scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const target = upcomingRef.current;
-      container.scrollTo({
-        top: target.offsetTop - container.offsetTop,
-      });
+    // Only scroll the first time the component becomes active and has data
+    if (
+      props.isActive &&
+      !hasScrolledOnFirstActivation.current &&
+      data.length > 0 &&
+      upcomingRef.current &&
+      scrollContainerRef.current
+    ) {
+      const timeoutId = setTimeout(() => {
+        if (upcomingRef.current && scrollContainerRef.current) {
+          const container = scrollContainerRef.current;
+          const target = upcomingRef.current;
+
+          container.scrollTo({
+            top: target.offsetTop - container.offsetTop,
+          });
+
+          hasScrolledOnFirstActivation.current = true;
+        }
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
     }
-  }, [data]);
+  }, [props.isActive, data]);
 
   if (isLoading) {
     return <LoadingSpinner />;
