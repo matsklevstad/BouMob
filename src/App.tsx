@@ -19,7 +19,18 @@ function App() {
           setSelectedView={setSelectedView}
         />
       </div>
-      {selectedView === "Matches" ? <Matches /> : <Standings />}
+      <div className="content-container">
+        <div
+          className={`view-content ${selectedView === "Matches" ? "active" : "hidden"}`}
+        >
+          <Matches />
+        </div>
+        <div
+          className={`view-content ${selectedView === "Standings" ? "active" : "hidden"}`}
+        >
+          <Standings />
+        </div>
+      </div>
     </div>
   );
 }

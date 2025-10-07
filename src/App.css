@@ -3,3 +3,21 @@
   margin-bottom: 1rem;
   padding: 0rem 1rem;
 }
+
+.content-container {
+  position: relative;
+}
+
+.view-content {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.view-content.active {
+  display: block;
+  opacity: 1;
+}
+
+.view-content.hidden {
+  display: none;
+  opacity: 0;
+}
