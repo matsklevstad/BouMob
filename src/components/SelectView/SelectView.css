@@ -7,15 +7,27 @@
 .tab {
   padding: 0 0 10px 0;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
   font-weight: bold;
   transition: border-color 0.3s ease;
   color: gray;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
 .tab.active {
-  border-bottom: 3px solid #5dbc6f;
   color: white;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #5dbc6f;
+  border-radius: 4px 4px 0 0;
 }
 
 @media (max-width: 600px) {

@@ -1,12 +1,6 @@
 function Header() {
   return (
-    <header
-      style={{
-        display: "flex",
-        backgroundColor: "#191919",
-        borderRadius: "8px",
-      }}
-    >
+    <header>
       <img
         src="/header.png"
         alt="BouMob Logo"

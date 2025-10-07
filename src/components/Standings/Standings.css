@@ -1,7 +1,7 @@
 .standings-wrapper {
   background: #1b1b1b;
   border-radius: 8px;
-  padding: 1rem 0.75rem 0.5rem;
+  padding: 0.5rem 0rem;
   font-size: 0.9rem;
   overflow: hidden;
   margin: 0.5rem;
@@ -11,39 +11,72 @@
   display: grid;
   /* 9 kolonner: pos | lag | 7 tall */
   grid-template-columns:
-    1rem /* pos */
+    1.5rem /* pos */
     minmax(5rem, 1fr) /* lag */
-    repeat(7, minmax(1rem, 5rem)); /* resten */
+    repeat(7, minmax(1rem, 4rem)); /* resten */
   align-items: center;
-  padding: 0.45rem 0rem;
-  margin-bottom: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #1212147f;
+}
+
+.standings-grid:first-child {
+  padding-bottom: 0.75rem;
+}
+
+.standings_header_text {
+  font-weight: bold;
+  color: #ffffff9a;
+  text-align: left;
 }
 
 .standings-grid > span {
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .standings-row {
-  border-top: 1px solid #161616;
   padding: 0rem 0.1rem;
 }
 
 .standings-row.top {
-  border-left: 2px solid #5dbc6f;
-  margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
+  padding-right: 0.75rem;
+  position: relative;
+}
+
+.standings-row.top::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 90%;
+  width: 3px;
+  background: #5dbc6f;
+  border-radius: 0 4px 4px 0;
 }
 
 .standings-row.middle {
   border-left: 2px solid transparent;
-  margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
+  padding-right: 0.75rem;
 }
 
 .standings-row.bottom {
-  border-left: 2px solid #ec564f;
-  margin-left: -0.75rem;
   padding-left: calc(0.4rem + 0.75rem - 3px);
+  padding-right: 0.75rem;
+  border-bottom: none;
+  position: relative;
+}
+
+.standings-row.bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5%;
+  height: 90%;
+  width: 3px;
+  background: #db3b3bff;
+  border-radius: 0 4px 4px 0;
 }
 
 .standings-row:hover {
@@ -59,11 +92,32 @@
   font-weight: bold;
 }
 
+.legend_container {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #ffffff9a;
+  margin: 1rem 0;
+  padding-left: 1rem;
+}
+
+.legend_section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend_color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
 @media (max-width: 600px) {
   .standings-wrapper {
     font-size: 0.75rem;
     margin: 0.2rem;
-    margin-top: 1rem;
   }
 
   .standings-grid {
@@ -72,13 +126,13 @@
     grid-template-columns:
       0.1rem
       minmax(5rem, 1fr)
-      1rem
-      1rem
-      1rem
-      1rem
-      2.2rem
-      1rem
-      1rem;
+      0.5rem
+      0.5rem
+      0.5rem
+      0.5rem
+      1.8rem
+      0.7rem
+      0.7rem;
   }
   .standings-row {
     padding: 0.3rem;
@@ -86,5 +140,10 @@
   }
   .standings-header {
     font-size: 0.68rem;
+  }
+
+  .legend_container {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
