@@ -4,16 +4,15 @@ import "./Standings.css";
 import { getTeamLogo } from "../../utils/utils";
 
 function Standings() {
-  const URL = "/api/tournament-standings?tournamentId=436311";
+  const ENDPOINT_URL = "/api/tournament-standings?tournamentId=436311";
   const [data, setData] = useState<Standing[]>([]);
 
   useEffect(() => {
     let active = true;
     (async () => {
       try {
-        const res = await fetch(URL);
-        const json = await res.json();
-        if (active) setData(json);
+        const response = await fetch(ENDPOINT_URL).then((res) => res.json());
+        setData(response);
       } catch (e) {
         console.error(e);
       }
@@ -62,7 +61,7 @@ function Standings() {
                   whiteSpace: "nowrap",
                 }}
               >
-                {team.orgName}
+                {team.orgId}
               </p>
             </span>
             <p>{team.matches}</p>

@@ -1,0 +1,25 @@
+.select-view {
+  display: flex;
+  gap: 2rem;
+  margin-top: 10px;
+}
+
+.tab {
+  padding: 0 0 10px 0;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  font-weight: bold;
+  transition: border-color 0.3s ease;
+  color: gray;
+}
+
+.tab.active {
+  border-bottom: 3px solid #5dbc6f;
+  color: white;
+}
+
+@media (max-width: 600px) {
+.tab{
+  font-size: 0.85rem;
+}
+}

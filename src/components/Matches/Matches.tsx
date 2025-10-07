@@ -4,14 +4,14 @@ import "./Matches.css";
 import { getTeamLogo } from "../../utils/utils";
 
 function Matches() {
-  const BASE_URL = "/api/tournament-matches?tournamentId=436311";
+  const ENDPOINT_URL = "/api/tournament-matches?tournamentId=436311";
   const [data, setData] = useState<Match[]>([]);
   const upcomingRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(BASE_URL).then((res) => res.json());
+      const response = await fetch(ENDPOINT_URL).then((res) => res.json());
       setData(response.matches);
     };
     fetchData();
@@ -67,11 +67,35 @@ function Matches() {
             ref={isFirstUpcoming ? upcomingRef : null}
             className="match-group"
           >
-            <p className="match-date">{date}</p>
+            <p className="match-date">
+              {date ===
+              new Date().toLocaleDateString("nb-NO", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+              })
+                ? "I dag"
+                : date ===
+                  new Date(Date.now() - 86400000).toLocaleDateString("nb-NO", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                  })
+                ? "I går  "
+                : date}
+            </p>
             {matches.map((match) => (
               <div key={match.matchId} className="match-row">
-                <span style={{ display: "flex", alignItems: "center", gap: 4, justifyContent: 'flex-end', width: "100%" }}>
-                  <p>{match.hometeam.split("-")[0]}</p>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 4,
+                    justifyContent: "flex-end",
+                    width: "100%",
+                  }}
+                >
+                  <p>{match.hometeamOrgName}</p>
                   <img
                     src={getTeamLogo(match.hometeamId)}
                     className="team-logo"
@@ -85,12 +109,20 @@ function Matches() {
                         .padStart(4, "0")
                         .replace(/(\d{2})(\d{2})/, "$1:$2")}
                 </p>
-                <span style={{ display: "flex", alignItems: "center", gap: 4, justifyContent: 'flex-start', width: "100%" }}>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 4,
+                    justifyContent: "flex-start",
+                    width: "100%",
+                  }}
+                >
                   <img
                     src={getTeamLogo(match.awayteamId)}
                     className="team-logo"
                   />
-                  <p>{match.awayteam.split("-")[0]}</p>
+                  <p>{match.awayteamOrgName}</p>
                 </span>
               </div>
             ))}
