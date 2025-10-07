@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { track } from "@vercel/analytics";
 import "./SelectView.css";
 
 type ViewType = "Matches" | "Standings";
@@ -9,6 +10,12 @@ interface SelectViewProps {
 }
 
 function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
+  const handleViewChange = (view: ViewType) => {
+    if (view !== selectedView) {
+      setSelectedView(view);
+      track("tab_view", { tab: view });
+    }
+  };
   useEffect(() => {
     const handleSwipeStart = (e: TouchEvent) => {
       const startX = e.changedTouches[0].clientX;
@@ -18,9 +25,9 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
         const diffX = endX - startX;
 
         if (diffX > 50) {
-          setSelectedView("Standings"); // Swipe right
+          handleViewChange("Standings"); // Swipe right
         } else if (diffX < -50) {
-          setSelectedView("Matches"); // Swipe left
+          handleViewChange("Matches"); // Swipe left
         }
 
         document.removeEventListener("touchend", handleSwipeEnd);
@@ -37,13 +44,13 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
     <div className="select-view">
       <div
         className={`tab ${selectedView === "Standings" ? "active" : ""}`}
-        onClick={() => setSelectedView("Standings")}
+        onClick={() => handleViewChange("Standings")}
       >
         Tabell
       </div>
       <div
         className={`tab ${selectedView === "Matches" ? "active" : ""}`}
-        onClick={() => setSelectedView("Matches")}
+        onClick={() => handleViewChange("Matches")}
       >
         Kamper
       </div>
