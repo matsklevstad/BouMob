@@ -16,7 +16,11 @@ function Standings() {
           <span className="standings_header_text">V</span>
           <span className="standings_header_text">U</span>
           <span className="standings_header_text">T</span>
-          <span className="standings_header_text">+/-</span>
+          <span
+            className="standings_header_text"
+            style={{ textAlign: "center" }}>
+            +/-
+          </span>
           <span className="standings_header_text">MF</span>
           <span className="standings_header_text">P</span>
         </div>
