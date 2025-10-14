@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Matches from "./components/Matches/Matches";
 import SelectView from "./components/SelectView/SelectView";
-import Standings from "./components/Standings/Standings_copy";
+import Standings from "./components/Standings/Standings";
 
 type ViewType = "Matches" | "Standings";
 
@@ -19,7 +19,8 @@ function App() {
             flexDirection: "column",
             maxWidth: "1200px",
             width: "100%",
-          }}>
+          }}
+        >
           <Header />
           <SelectView
             selectedView={selectedView}
@@ -31,13 +32,15 @@ function App() {
         <div
           className={`view-content ${
             selectedView === "Matches" ? "active" : "hidden"
-          }`}>
+          }`}
+        >
           <Matches isActive={selectedView === "Matches"} />
         </div>
         <div
           className={`view-content ${
             selectedView === "Standings" ? "active" : "hidden"
-          }`}>
+          }`}
+        >
           <Standings />
         </div>
       </div>

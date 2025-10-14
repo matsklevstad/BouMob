@@ -1,12 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import type { Standing } from "../../types/Standing";
 import "./Standings.css";
 import { getTeamLogo } from "../../utils/utils";
+// import { fakeStandingsData } from "../../utils/fake_standings_utils";
+import type { Standing } from "../../types/Standing";
+import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function Standings() {
-  const ENDPOINT_URL = "/api/tournament-standings?tournamentId=436311";
+  // const fakeData: Partial<Standing>[] = fakeStandingsData;
 
+  const ENDPOINT_URL = "/api/tournament-standings?tournamentId=436311";
   const {
     data = [],
     isLoading,
@@ -31,61 +33,84 @@ function Standings() {
   }
 
   return (
-    <div className="standings-wrapper">
-      <div className="standings-grid">
-        <span style={{ fontWeight: "bold" }}>#</span>
-        <span style={{ fontWeight: "bold" }}>Lag</span>
-        <span style={{ fontWeight: "bold" }}>SP</span>
-        <span style={{ fontWeight: "bold" }}>V</span>
-        <span style={{ fontWeight: "bold" }}>U</span>
-        <span style={{ fontWeight: "bold" }}>T</span>
-        <span style={{ fontWeight: "bold", textAlign: "center" }}>+/-</span>
-        <span style={{ fontWeight: "bold" }}>MF</span>
-        <span style={{ fontWeight: "bold" }}>P</span>
-      </div>
-      {data.map((team) => {
-        const highlight =
-          team.position === 1
-            ? "top"
-            : team.position === 9
-              ? "bottom"
-              : "middle";
-        return (
-          <div
-            key={team.position}
-            className={`standings-grid standings-row ${highlight}`}
+    <div>
+      <div className="standings-wrapper">
+        <div className="standings-grid">
+          <span className="standings_header_text">#</span>
+          <span className="standings_header_text">Lag</span>
+          <span className="standings_header_text">SP</span>
+          <span className="standings_header_text">V</span>
+          <span className="standings_header_text">U</span>
+          <span className="standings_header_text">T</span>
+          <span
+            className="standings_header_text"
+            style={{ textAlign: "center" }}
           >
-            <p>{team.position}</p>
-            <span className="team">
-              <img
-                src={getTeamLogo(team.orgId)}
-                alt={team.orgName}
-                style={{ width: "1.5rem", marginRight: "0.5rem" }}
-              />
-              <p
-                style={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {team.orgName}
+            +/-
+          </span>
+          <span className="standings_header_text">MF</span>
+          <span className="standings_header_text">P</span>
+        </div>
+        {data.map((team) => {
+          const highlight =
+            team.position === 1
+              ? "top"
+              : team.position === 9
+                ? "bottom"
+                : "middle";
+          return (
+            <div
+              key={team.position}
+              className={`standings-grid standings-row ${highlight}`}
+            >
+              <p>{team.position}</p>
+              <span className="team">
+                <img
+                  src={getTeamLogo(team.orgId as number)}
+                  alt={team.orgName}
+                  style={{ width: "1.5rem", marginRight: "0.5rem" }}
+                />
+                <p
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {team.orgName}
+                </p>
+              </span>
+              <p>{team.matches}</p>
+              <p>{team.victories}</p>
+              <p>{team.draws}</p>
+              <p>{team.losses}</p>
+              <span>{team.totalGoalsFormatted}</span>
+              <p>
+                {(team.goalDifference ?? 0) > 0
+                  ? `+${team.goalDifference ?? 0}`
+                  : (team.goalDifference ?? 0)}
               </p>
-            </span>
-            <p>{team.matches}</p>
-            <p>{team.victories}</p>
-            <p>{team.draws}</p>
-            <p>{team.losses}</p>
-            <span>{team.totalGoalsFormatted}</span>
-            <p>
-              {team.goalDifference > 0
-                ? `+${team.goalDifference}`
-                : team.goalDifference}
-            </p>
-            <p className="points">{team.totalPoints}</p>
-          </div>
-        );
-      })}
+              <p className="points">{team.totalPoints}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="legend_container">
+        <div className="legend_section">
+          <div
+            className="legend_color"
+            style={{ backgroundColor: "#5dbc6f" }}
+          />{" "}
+          Opprykk
+        </div>
+        <div className="legend_section">
+          <div
+            className="legend_color"
+            style={{ backgroundColor: "#db3b3b" }}
+          />{" "}
+          Nedrykk
+        </div>
+      </div>
     </div>
   );
 }

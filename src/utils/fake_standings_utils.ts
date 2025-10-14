@@ -4,8 +4,8 @@ import type { Standing } from "../types/Standing";
 export const fakeStandingsData: Partial<Standing>[] = [
   {
     position: 1,
-    orgId: 1011569, // Ryde (from TEAM_LOGOS)
-    orgName: "Ryde",
+    orgId: 1011569,
+    orgName: "Arsenal",
     matches: 14,
     victories: 11,
     draws: 1,
@@ -16,8 +16,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 2,
-    orgId: 1009858, // Tanem Drekk Å Høvleri (mapped to tandem/default2)
-    orgName: "Tanem Drekk Å Høvleri",
+    orgId: 1009858,
+    orgName: "Barcelona",
     matches: 15,
     victories: 10,
     draws: 3,
@@ -28,8 +28,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 3,
-    orgId: 1009856, // AC Munkvoll (mapped to default)
-    orgName: "AC Munkvoll",
+    orgId: 1009856,
+    orgName: "Juventus",
     matches: 15,
     victories: 9,
     draws: 1,
@@ -40,8 +40,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 4,
-    orgId: 913462, // Bouvet (matches TEAM_LOGOS)
-    orgName: "Bouvet",
+    orgId: 913462,
+    orgName: "Bayern Munich",
     matches: 14,
     victories: 8,
     draws: 2,
@@ -52,8 +52,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 5,
-    orgId: 995429, // Aker Solutions
-    orgName: "Aker Solutions",
+    orgId: 995429,
+    orgName: "Paris Saint-Germain",
     matches: 15,
     victories: 6,
     draws: 1,
@@ -64,8 +64,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 6,
-    orgId: 177642, // Jernbanen (mapped to jernbanen/default3)
-    orgName: "Jernbanen",
+    orgId: 177642,
+    orgName: "Manchester United",
     matches: 15,
     victories: 5,
     draws: 2,
@@ -76,8 +76,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 7,
-    orgId: 716906, // Bravida FK
-    orgName: "Bravida FK",
+    orgId: 716906,
+    orgName: "Real Madrid",
     matches: 15,
     victories: 4,
     draws: 3,
@@ -88,8 +88,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 8,
-    orgId: 995679, // Enova
-    orgName: "Enova",
+    orgId: 995679,
+    orgName: "Liverpool",
     matches: 16,
     victories: 4,
     draws: 3,
@@ -100,8 +100,8 @@ export const fakeStandingsData: Partial<Standing>[] = [
   },
   {
     position: 9,
-    orgId: 1000302, // NAVpoli (nav)
-    orgName: "NAVpoli",
+    orgId: 1000302,
+    orgName: "Chelsea",
     matches: 15,
     victories: 2,
     draws: 0,
