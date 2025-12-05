@@ -1,9 +1,9 @@
-import "../src/index.css";
-import "../src/App.css";
-import "../src/components/LoadingSpinner/LoadingSpinner.css";
-import "../src/components/SelectView/SelectView.css";
-import "../src/components/Standings/Standings.css";
-import "../src/components/Matches/Matches.css";
+import "@/index.css";
+import "@/App.css";
+import "@/components/LoadingSpinner/LoadingSpinner.css";
+import "@/components/SelectView/SelectView.css";
+import "@/components/Standings/Standings.css";
+import "@/components/Matches/Matches.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";

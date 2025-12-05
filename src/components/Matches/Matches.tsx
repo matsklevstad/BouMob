@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { Match } from "../../types/Match";
 import { getTeamLogo } from "../../utils/utils";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import "@/components/Matches/Matches.css";
 
 interface Props {
   isActive: boolean;
