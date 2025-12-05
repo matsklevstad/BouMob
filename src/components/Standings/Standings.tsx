@@ -3,6 +3,7 @@ import { getTeamLogo } from "../../utils/utils";
 import type { Standing } from "../../types/Standing";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import "./Standings.css";
 
 function Standings() {
   // const fakeData: Partial<Standing>[] = fakeStandingsData;

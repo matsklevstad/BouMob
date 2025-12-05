@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
-import Header from "../src/components/Header";
-import Matches from "../src/components/Matches/Matches";
-import SelectView from "../src/components/SelectView/SelectView";
-import Standings from "../src/components/Standings/Standings";
+import Header from "../components/Header";
+import Matches from "../components/Matches/Matches";
+import SelectView from "../components/SelectView/SelectView";
+import Standings from "../components/Standings/Standings";
 
 type ViewType = "Matches" | "Standings";
 
