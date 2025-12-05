@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import Header from "./components/Header";
 import Matches from "./components/Matches/Matches";
 import SelectView from "./components/SelectView/SelectView";

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { track } from "@vercel/analytics";
-import "./SelectView.css";
 
 type ViewType = "Matches" | "Standings";
 
