@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { Match } from "../../types/Match";
-import "./Matches.css";
 import { getTeamLogo } from "../../utils/utils";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 

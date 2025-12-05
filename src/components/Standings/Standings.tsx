@@ -1,4 +1,3 @@
-import "./Standings.css";
 import { getTeamLogo } from "../../utils/utils";
 // import { fakeStandingsData } from "../../utils/fake_standings_utils";
 import type { Standing } from "../../types/Standing";
