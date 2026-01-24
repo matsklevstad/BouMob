@@ -2,6 +2,8 @@
   display: flex;
   gap: 2rem;
   margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .tab {
@@ -30,8 +32,23 @@
   border-radius: 4px 4px 0 0;
 }
 
+.tab.admin-tab {
+  color: #ff9800;
+}
+
+.tab.profile-tab {
+  color: #2196f3;
+}
+
+.tab.login-tab {
+  color: #4caf50;
+}
+
 @media (max-width: 600px) {
   .tab {
     font-size: 0.85rem;
+  }
+  .select-view {
+    gap: 1rem;
   }
 }

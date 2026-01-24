@@ -27,3 +27,15 @@ export async function createClient() {
     },
   );
 }
+
+// Simple client for API routes that don't need cookies
+export const supabase = createServerClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+  {
+    cookies: {
+      getAll: () => [],
+      setAll: () => {},
+    },
+  },
+);

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../../contexts/AuthContext";
 import { track } from "@vercel/analytics";
 
 type ViewType = "Matches" | "Standings";
@@ -9,12 +11,16 @@ interface SelectViewProps {
 }
 
 function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
+  const router = useRouter();
+  const { user, profile } = useAuth();
+
   const handleViewChange = (view: ViewType) => {
     if (view !== selectedView) {
       setSelectedView(view);
       track("tab_view", { tab: view });
     }
   };
+
   useEffect(() => {
     const handleSwipeStart = (e: TouchEvent) => {
       const startX = e.changedTouches[0].clientX;
@@ -53,6 +59,32 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
       >
         Kamper
       </div>
+      <div className="tab" onClick={() => router.push("/fantasy")}>
+        Fantasy
+      </div>
+      <div className="tab" onClick={() => router.push("/leaderboard")}>
+        Leaderboard
+      </div>
+      {profile?.is_admin && (
+        <div
+          className="tab admin-tab"
+          onClick={() => router.push("/admin/players")}
+        >
+          Admin
+        </div>
+      )}
+      {user ? (
+        <div
+          className="tab profile-tab"
+          onClick={() => router.push("/profile")}
+        >
+          {profile?.username || "Profile"}
+        </div>
+      ) : (
+        <div className="tab login-tab" onClick={() => router.push("/login")}>
+          Login
+        </div>
+      )}
     </div>
   );
 }
