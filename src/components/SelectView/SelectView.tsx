@@ -47,44 +47,28 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
 
   return (
     <div className="select-view">
-      <div
-        className={`tab ${selectedView === "Standings" ? "active" : ""}`}
-        onClick={() => handleViewChange("Standings")}
-      >
-        Tabell
-      </div>
-      <div
-        className={`tab ${selectedView === "Matches" ? "active" : ""}`}
-        onClick={() => handleViewChange("Matches")}
-      >
-        Kamper
-      </div>
-      <div className="tab" onClick={() => router.push("/fantasy")}>
-        Fantasy
-      </div>
-      <div className="tab" onClick={() => router.push("/leaderboard")}>
-        Leaderboard
-      </div>
-      {profile?.is_admin && (
+      <div className="tabs-left">
         <div
-          className="tab admin-tab"
-          onClick={() => router.push("/admin/players")}
+          className={`tab ${selectedView === "Standings" ? "active" : ""}`}
+          onClick={() => handleViewChange("Standings")}
         >
-          Admin
+          Tabell
         </div>
-      )}
-      {user ? (
         <div
-          className="tab profile-tab"
-          onClick={() => router.push("/profile")}
+          className={`tab ${selectedView === "Matches" ? "active" : ""}`}
+          onClick={() => handleViewChange("Matches")}
         >
-          {profile?.username || "Profile"}
+          Kamper
         </div>
-      ) : (
-        <div className="tab login-tab" onClick={() => router.push("/login")}>
-          Login
+      </div>
+      <div className="tabs-right">
+        <div
+          className="tab fantasy-tab"
+          onClick={() => router.push("/fantasy")}
+        >
+          Fantasy
         </div>
-      )}
+      </div>
     </div>
   );
 }

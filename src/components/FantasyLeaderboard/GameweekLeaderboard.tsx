@@ -136,6 +136,7 @@ export default function GameweekLeaderboard() {
         h2 {
           margin-bottom: 1.5rem;
           text-align: center;
+          color: white;
         }
         .gameweek-selector {
           margin-bottom: 2rem;
@@ -145,35 +146,43 @@ export default function GameweekLeaderboard() {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 600;
+          color: gray;
         }
         .gameweek-selector select {
           padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
+          border: 2px solid #2a2a2a;
+          background: #1a1a1a;
+          color: white;
+          border-radius: 8px;
           font-size: 1rem;
           min-width: 300px;
         }
+        .gameweek-selector select:focus {
+          outline: none;
+          border-color: #5dbc6f;
+        }
         .leaderboard-table {
           width: 100%;
-          background: white;
-          border-radius: 8px;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
+          border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .leaderboard-table th,
         .leaderboard-table td {
           padding: 1rem;
           text-align: left;
+          color: white;
         }
         .leaderboard-table th {
-          background: #f5f5f5;
+          background: #2a2a2a;
           font-weight: 600;
         }
         .leaderboard-table tr:not(:last-child) {
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid #2a2a2a;
         }
         .leaderboard-table tr.winner {
-          background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+          background: linear-gradient(135deg, #2a2a1a 0%, #3a3a1a 100%);
         }
         .rank {
           font-size: 1.5rem;
@@ -184,11 +193,11 @@ export default function GameweekLeaderboard() {
           font-weight: 600;
         }
         .username {
-          color: #666;
+          color: gray;
         }
         .points {
           font-weight: bold;
-          color: #4caf50;
+          color: #5dbc6f;
           font-size: 1.2rem;
           text-align: right;
         }
@@ -196,7 +205,7 @@ export default function GameweekLeaderboard() {
         .no-data {
           text-align: center;
           padding: 2rem;
-          color: #666;
+          color: gray;
         }
       `}</style>
     </div>

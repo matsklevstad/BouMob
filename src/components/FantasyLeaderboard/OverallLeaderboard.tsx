@@ -124,40 +124,41 @@ export default function OverallLeaderboard({
         h2 {
           margin-bottom: 0.5rem;
           text-align: center;
+          color: white;
         }
         .subtitle {
           text-align: center;
-          color: #888;
+          color: gray;
           margin-bottom: 1.5rem;
         }
         .leaderboard-table {
           width: 100%;
-          background: white;
-          border-radius: 8px;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
+          border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .leaderboard-table th,
         .leaderboard-table td {
           padding: 1rem;
           text-align: left;
+          color: white;
         }
         .leaderboard-table th {
-          background: #f5f5f5;
+          background: #2a2a2a;
           font-weight: 600;
-          color: #333;
         }
         .leaderboard-table tr:not(:last-child) {
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid #2a2a2a;
         }
         .leaderboard-table tr.top-1 {
-          background: #fff8e1;
+          background: #2a2a1a;
         }
         .leaderboard-table tr.top-2 {
-          background: #f5f5f5;
+          background: #1a1a1a;
         }
         .leaderboard-table tr.top-3 {
-          background: #fff3e0;
+          background: #2a2a1a;
         }
         .rank {
           font-size: 1.5rem;
@@ -166,14 +167,13 @@ export default function OverallLeaderboard({
         }
         .team-name {
           font-weight: 600;
-          color: #333;
         }
         .username {
-          color: #666;
+          color: gray;
         }
         .points {
           font-weight: bold;
-          color: #4caf50;
+          color: #5dbc6f;
           font-size: 1.2rem;
           text-align: right;
         }
@@ -182,7 +182,7 @@ export default function OverallLeaderboard({
           background: #2196f3;
           color: white;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           cursor: pointer;
           font-size: 0.85rem;
           transition: background 0.2s;
@@ -194,7 +194,7 @@ export default function OverallLeaderboard({
         .no-data {
           text-align: center;
           padding: 2rem;
-          color: #666;
+          color: gray;
         }
       `}</style>
     </div>

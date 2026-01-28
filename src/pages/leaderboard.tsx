@@ -34,10 +34,15 @@ export default function LeaderboardPage() {
           padding: 2rem;
           max-width: 1000px;
           margin: 0 auto;
+          min-height: 100vh;
+          background: #0a0a0a;
+          color: white;
         }
         h1 {
           text-align: center;
           margin-bottom: 2rem;
+          color: white;
+          font-weight: bold;
         }
         .tabs {
           display: flex;
@@ -47,26 +52,28 @@ export default function LeaderboardPage() {
         }
         .tab {
           padding: 0.75rem 2rem;
-          border: none;
-          background: white;
-          border-radius: 8px 8px 0 0;
+          border: 2px solid #2a2a2a;
+          background: #1a1a1a;
+          color: gray;
+          border-radius: 8px;
           cursor: pointer;
           font-size: 1rem;
           font-weight: 500;
           transition: all 0.2s;
         }
         .tab:hover {
-          background: #f5f5f5;
+          border-color: #5dbc6f;
         }
         .tab.active {
-          background: #4caf50;
+          background: #1a1a1a;
+          border-color: #5dbc6f;
           color: white;
         }
         .tab-content {
-          background: white;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
           border-radius: 8px;
           padding: 1rem;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
       `}</style>
     </div>

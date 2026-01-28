@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contexts/AuthContext";
 import { Gameweek } from "../../types/Gameweek";
+import AdminNav from "../../components/AdminNav/AdminNav";
 
 export default function AdminGameweeksPage() {
   const { profile, loading: authLoading } = useAuth();
@@ -32,9 +33,17 @@ export default function AdminGameweeksPage() {
     try {
       const response = await fetch("/api/admin/gameweeks");
       const data = await response.json();
-      setGameweeks(data);
+
+      // Validate data is an array
+      if (Array.isArray(data)) {
+        setGameweeks(data);
+      } else {
+        console.error("Invalid gameweeks data:", data);
+        setGameweeks([]);
+      }
     } catch (error) {
       console.error("Error fetching gameweeks:", error);
+      setGameweeks([]);
     } finally {
       setLoading(false);
     }
@@ -127,8 +136,14 @@ export default function AdminGameweeksPage() {
     return <div className="loading">Loading...</div>;
   }
 
+  // Redirect non-admin users
+  if (!profile || !profile.is_admin) {
+    return null;
+  }
+
   return (
     <div className="admin-page">
+      <AdminNav currentPage="gameweeks" />
       <div className="admin-header">
         <h1>Manage Gameweeks</h1>
         <button onClick={handleAdd} className="add-button">
@@ -259,6 +274,8 @@ export default function AdminGameweeksPage() {
           padding: 2rem;
           max-width: 1200px;
           margin: 0 auto;
+          min-height: 100vh;
+          background: #0a0a0a;
         }
         .admin-header {
           display: flex;
@@ -266,32 +283,41 @@ export default function AdminGameweeksPage() {
           align-items: center;
           margin-bottom: 2rem;
         }
+        h1 {
+          color: white;
+          font-weight: bold;
+        }
         .add-button {
           padding: 0.75rem 1.5rem;
-          background: #4caf50;
+          background: #5dbc6f;
           color: white;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           cursor: pointer;
+          transition: all 0.2s;
+        }
+        .add-button:hover {
+          background: #4da85e;
         }
         .gameweeks-table {
           width: 100%;
-          background: white;
-          border-radius: 8px;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
+          border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .gameweeks-table th,
         .gameweeks-table td {
           padding: 1rem;
           text-align: left;
+          color: white;
         }
         .gameweeks-table th {
-          background: #f5f5f5;
+          background: #2a2a2a;
           font-weight: 600;
         }
         .gameweeks-table tr:not(:last-child) {
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid #2a2a2a;
         }
         .status {
           padding: 0.25rem 0.75rem;
@@ -300,12 +326,12 @@ export default function AdminGameweeksPage() {
           font-weight: 500;
         }
         .status.active {
-          background: #e3f2fd;
-          color: #1976d2;
+          background: #1a2a3a;
+          color: #64b5f6;
         }
         .status.completed {
-          background: #e8f5e9;
-          color: #388e3c;
+          background: #1a2a1a;
+          color: #5dbc6f;
         }
         .actions {
           display: flex;
@@ -316,21 +342,31 @@ export default function AdminGameweeksPage() {
         .delete-btn {
           padding: 0.5rem 1rem;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           cursor: pointer;
           font-size: 0.9rem;
+          transition: all 0.2s;
         }
         .edit-btn {
           background: #2196f3;
           color: white;
         }
+        .edit-btn:hover {
+          background: #1976d2;
+        }
         .complete-btn {
-          background: #4caf50;
+          background: #5dbc6f;
           color: white;
         }
+        .complete-btn:hover {
+          background: #4da85e;
+        }
         .delete-btn {
-          background: #f44336;
+          background: #ff4444;
           color: white;
+        }
+        .delete-btn:hover {
+          background: #cc3333;
         }
         .modal-overlay {
           position: fixed;
@@ -338,18 +374,22 @@ export default function AdminGameweeksPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.8);
           display: flex;
           justify-content: center;
           align-items: center;
           z-index: 1000;
         }
         .modal {
-          background: white;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
           padding: 2rem;
-          border-radius: 8px;
+          border-radius: 12px;
           max-width: 500px;
           width: 90%;
+        }
+        h2 {
+          color: white;
         }
         .form-group {
           margin-bottom: 1.5rem;
@@ -358,12 +398,19 @@ export default function AdminGameweeksPage() {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
+          color: gray;
         }
         .form-group input {
           width: 100%;
           padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
+          border: 2px solid #2a2a2a;
+          background: #0a0a0a;
+          color: white;
+          border-radius: 8px;
+        }
+        .form-group input:focus {
+          outline: none;
+          border-color: #5dbc6f;
         }
         .modal-actions {
           display: flex;
@@ -374,19 +421,28 @@ export default function AdminGameweeksPage() {
           flex: 1;
           padding: 0.75rem;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           cursor: pointer;
+          transition: all 0.2s;
         }
         .submit-button {
-          background: #4caf50;
+          background: #5dbc6f;
           color: white;
         }
+        .submit-button:hover {
+          background: #4da85e;
+        }
         .cancel-button {
-          background: #f5f5f5;
+          background: #2a2a2a;
+          color: white;
+        }
+        .cancel-button:hover {
+          background: #3a3a3a;
         }
         .loading {
           text-align: center;
           padding: 2rem;
+          color: white;
         }
       `}</style>
     </div>

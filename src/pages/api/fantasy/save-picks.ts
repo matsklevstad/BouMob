@@ -71,22 +71,45 @@ export default async function handler(
         return res.status(404).json({ error: "Profile not found" });
       }
 
-      // Check if gameweek exists and deadline hasn't passed
-      const { data: gameweek, error: gameweekError } = await supabase
-        .from("gameweeks")
-        .select("*")
-        .eq("id", gameweek_id)
-        .single();
+      // If gameweek_id is provided, validate it
+      if (gameweek_id) {
+        const { data: gameweek, error: gameweekError } = await supabase
+          .from("gameweeks")
+          .select("*")
+          .eq("id", gameweek_id)
+          .single();
 
-      if (gameweekError) throw gameweekError;
+        if (gameweekError) throw gameweekError;
 
-      const now = new Date();
-      const deadline = new Date(gameweek.deadline_at);
+        const now = new Date();
+        const deadline = new Date(gameweek.deadline_at);
 
-      if (now > deadline) {
-        return res
-          .status(400)
-          .json({ error: "Deadline has passed for this gameweek" });
+        if (now > deadline) {
+          return res
+            .status(400)
+            .json({ error: "Deadline has passed for this gameweek" });
+        }
+      } else {
+        // No gameweek provided - get the next upcoming gameweek if one exists
+        const { data: nextGameweek } = await supabase
+          .from("gameweeks")
+          .select("id")
+          .eq("is_completed", false)
+          .gte("deadline_at", new Date().toISOString())
+          .order("deadline_at", { ascending: true })
+          .limit(1)
+          .single();
+
+        // If there's an upcoming gameweek, use it; otherwise return error
+        if (nextGameweek) {
+          // Update the request body with the found gameweek
+          req.body.gameweek_id = nextGameweek.id;
+        } else {
+          return res.status(400).json({
+            error:
+              "No gameweek available to save picks for. Please wait for the admin to create the next gameweek.",
+          });
+        }
       }
 
       // Validate that we have 4 unique players
@@ -132,7 +155,7 @@ export default async function handler(
         .upsert(
           {
             profile_id: profile.id,
-            gameweek_id,
+            gameweek_id: req.body.gameweek_id,
             player_1_id,
             player_2_id,
             player_3_id,

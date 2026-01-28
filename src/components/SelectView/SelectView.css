@@ -1,9 +1,21 @@
 .select-view {
   display: flex;
-  gap: 2rem;
-  margin-top: 10px;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.tabs-left {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.tabs-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .tab {
@@ -32,23 +44,15 @@
   border-radius: 4px 4px 0 0;
 }
 
-.tab.admin-tab {
-  color: #ff9800;
-}
-
-.tab.profile-tab {
-  color: #2196f3;
-}
-
-.tab.login-tab {
-  color: #4caf50;
+.tab.fantasy-tab {
+  color: #9c27b0;
 }
 
 @media (max-width: 600px) {
   .tab {
     font-size: 0.85rem;
   }
-  .select-view {
+  .tabs-left {
     gap: 1rem;
   }
 }

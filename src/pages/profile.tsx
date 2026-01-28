@@ -1,27 +1,33 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../lib/supabase/client';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
+import { supabase } from "../lib/supabase/client";
 
 export default function ProfilePage() {
-  const { user, profile, loading: authLoading, refreshProfile, signOut } = useAuth();
+  const {
+    user,
+    profile,
+    loading: authLoading,
+    refreshProfile,
+    signOut,
+  } = useAuth();
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [teamName, setTeamName] = useState('');
+  const [username, setUsername] = useState("");
+  const [teamName, setTeamName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [user, authLoading, router]);
 
   useEffect(() => {
     if (profile) {
-      setUsername(profile.username || '');
-      setTeamName(profile.team_name || '');
+      setUsername(profile.username || "");
+      setTeamName(profile.team_name || "");
     }
   }, [profile]);
 
@@ -32,15 +38,15 @@ export default function ProfilePage() {
     setLoading(true);
 
     try {
-      if (!profile) throw new Error('Profile not found');
+      if (!profile) throw new Error("Profile not found");
 
       const { error } = await supabase
-        .from('profiles')
+        .from("profiles")
         .update({
           username,
           team_name: teamName,
         })
-        .eq('id', profile.id);
+        .eq("id", profile.id);
 
       if (error) throw error;
 
@@ -56,7 +62,7 @@ export default function ProfilePage() {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/login');
+    router.push("/login");
   };
 
   if (authLoading) {
@@ -97,17 +103,19 @@ export default function ProfilePage() {
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          {success && <div className="success-message">Profile updated successfully!</div>}
+          {success && (
+            <div className="success-message">Profile updated successfully!</div>
+          )}
           <div className="button-group">
-            <button typhandleSignOut}
+            <button type="submit" disabled={loading} className="submit-button">
+              {loading ? "Saving..." : "Save Profile"}
+            </button>
+            <button
+              type="button"
+              onClick={handleSignOut}
               className="signout-button"
             >
               Sign Out
-              type="button"
-              onClick={() => router.push('/fantasy')}
-              className="cancel-button"
-            >
-              Cancel
             </button>
           </div>
         </form>
@@ -115,7 +123,7 @@ export default function ProfilePage() {
       <style jsx>{`
         .profile-page {
           min-height: 100vh;
-          background: #f5f5f5;
+          background: #0a0a0a;
           padding: 2rem;
         }
         .loading-container {
@@ -123,18 +131,21 @@ export default function ProfilePage() {
           justify-content: center;
           align-items: center;
           min-height: 100vh;
+          background: #0a0a0a;
+          color: white;
         }
         .profile-container {
           max-width: 600px;
           margin: 0 auto;
-          background: white;
+          background: #1a1a1a;
+          border: 2px solid #2a2a2a;
           padding: 2rem;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 12px;
         }
         h1 {
           margin-bottom: 2rem;
-          color: #333;
+          color: white;
+          font-weight: bold;
         }
         .form-group {
           margin-bottom: 1.5rem;
@@ -143,38 +154,41 @@ export default function ProfilePage() {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
-          color: #555;
+          color: gray;
         }
         input {
           width: 100%;
           padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
+          border: 2px solid #2a2a2a;
+          background: #0a0a0a;
+          color: white;
+          border-radius: 8px;
           font-size: 1rem;
         }
         input:focus {
           outline: none;
-          border-color: #4CAF50;
+          border-color: #5dbc6f;
         }
         input:disabled {
-          background-color: #f5f5f5;
+          background-color: #1a1a1a;
           cursor: not-allowed;
+          opacity: 0.5;
         }
         .error-message {
           margin-bottom: 1rem;
           padding: 0.75rem;
-          background-color: #fee;
-          border: 1px solid #fcc;
-          border-radius: 4px;
-          color: #c33;
+          background-color: #2a1a1a;
+          border: 2px solid #ff4444;
+          border-radius: 8px;
+          color: #ff6666;
         }
         .success-message {
           margin-bottom: 1rem;
           padding: 0.75rem;
-          background-color: #efe;
-          border: 1px solid #cfc;
-          border-radius: 4px;
-          color: #3c3;
+          background-color: #1a2a1a;
+          border: 2px solid #5dbc6f;
+          border-radius: 8px;
+          color: #5dbc6f;
         }
         .button-group {
           display: flex;
@@ -185,29 +199,30 @@ export default function ProfilePage() {
           flex: 1;
           padding: 0.75rem;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           font-size: 1rem;
           font-weight: 500;
           cursor: pointer;
-          transition: background-color 0.2s;
+          transition: all 0.2s;
         }
         .submit-button {
-          background-color: #4CAF50;
+          background-color: #5dbc6f;
           color: white;
         }
         .submit-button:hover:not(:disabled) {
-          background-color: #45a049;
+          background-color: #4da85e;
         }
         .submit-button:disabled {
-          background-color: #ccc;
+          background-color: #2a2a2a;
+          color: gray;
           cursor: not-allowed;
         }
         .signout-button {
-          background-color: #f44336;
+          background-color: #ff4444;
           color: white;
         }
         .signout-button:hover {
-          background-color: #d32f2f;
+          background-color: #cc3333;
         }
       `}</style>
     </div>
