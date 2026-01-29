@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../../contexts/AuthContext";
 import { track } from "@vercel/analytics";
 
 type ViewType = "Matches" | "Standings";
@@ -9,12 +11,16 @@ interface SelectViewProps {
 }
 
 function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
+  const router = useRouter();
+  const { user, profile } = useAuth();
+
   const handleViewChange = (view: ViewType) => {
     if (view !== selectedView) {
       setSelectedView(view);
       track("tab_view", { tab: view });
     }
   };
+
   useEffect(() => {
     const handleSwipeStart = (e: TouchEvent) => {
       const startX = e.changedTouches[0].clientX;
@@ -41,17 +47,27 @@ function SelectView({ selectedView, setSelectedView }: SelectViewProps) {
 
   return (
     <div className="select-view">
-      <div
-        className={`tab ${selectedView === "Standings" ? "active" : ""}`}
-        onClick={() => handleViewChange("Standings")}
-      >
-        Tabell
+      <div className="tabs-left">
+        <div
+          className={`tab ${selectedView === "Standings" ? "active" : ""}`}
+          onClick={() => handleViewChange("Standings")}
+        >
+          Tabell
+        </div>
+        <div
+          className={`tab ${selectedView === "Matches" ? "active" : ""}`}
+          onClick={() => handleViewChange("Matches")}
+        >
+          Kamper
+        </div>
       </div>
-      <div
-        className={`tab ${selectedView === "Matches" ? "active" : ""}`}
-        onClick={() => handleViewChange("Matches")}
-      >
-        Kamper
+      <div className="tabs-right">
+        <div
+          className="tab fantasy-tab"
+          onClick={() => router.push("/fantasy")}
+        >
+          Fantasy
+        </div>
       </div>
     </div>
   );
